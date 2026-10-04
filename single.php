@@ -31,6 +31,13 @@
 
                 <div class="entry-content">
                     <?php the_content(); ?>
+
+                    <?php
+                    wp_link_pages([
+                        'before' => '<nav class="page-links mt-4" aria-label="' . esc_attr__('Page navigation', 'wp-starter') . '">',
+                        'after'  => '</nav>',
+                    ]);
+                    ?>
                 </div>
             <?php endwhile; ?>
         </article>
