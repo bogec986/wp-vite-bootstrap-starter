@@ -6,6 +6,7 @@ add_action('after_setup_theme', function (): void {
     load_theme_textdomain('wp-starter', get_template_directory() . '/languages');
 
     add_theme_support('title-tag');
+    add_theme_support('automatic-feed-links');
     add_theme_support('post-thumbnails');
     add_theme_support('custom-logo', [
         'height'      => 80,
