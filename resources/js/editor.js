@@ -1,3 +1,4 @@
+import '@fontsource/oswald/latin-ext-300.css';
 import '@fontsource/oswald/latin-ext-400.css';
 import '@fontsource/oswald/latin-ext-700.css';
 
