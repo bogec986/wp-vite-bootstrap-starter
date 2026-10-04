@@ -15,13 +15,6 @@ export default defineConfig(({ command }) => ({
         }),
     ],
 
-    optimizeDeps: {
-        exclude: [
-            '@fontsource/oswald',
-            '@fontsource/roboto',
-        ],
-    },
-
     build: {
         manifest: true,
         outDir: 'dist',
@@ -43,6 +36,7 @@ export default defineConfig(({ command }) => ({
     },
 
     server: {
+        origin: 'http://127.0.0.1:5173',
         host: '127.0.0.1',
         port: 5173,
         strictPort: true,
