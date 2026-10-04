@@ -15,6 +15,13 @@ export default defineConfig(({ command }) => ({
         }),
     ],
 
+    optimizeDeps: {
+        exclude: [
+            '@fontsource/oswald',
+            '@fontsource/roboto',
+        ],
+    },
+
     build: {
         manifest: true,
         outDir: 'dist',
