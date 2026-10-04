@@ -4,6 +4,8 @@ A lightweight, production-ready WordPress starter theme built with **Vite**, **B
 
 The theme is designed as a clean foundation for custom WordPress projects without unnecessary dependencies or page-builder overhead.
 
+![WP Starter screenshot](screenshot.png)
+
 ## Features
 
 - WordPress theme development with modern PHP
