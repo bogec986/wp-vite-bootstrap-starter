@@ -342,7 +342,7 @@ Before deployment:
 
 ```bash
 composer install --no-dev --optimize-autoloader
-npm ci
+npm install
 npm run build
 ```
 
