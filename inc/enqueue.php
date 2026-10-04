@@ -15,15 +15,15 @@ function wp_starter_vite_dev_enabled(): bool
 
 function wp_starter_vite_dev_server_available(): bool
 {
-    $connection = @fsockopen('127.0.0.1', 5173, $error_code, $error_message, 0.1);
+    $response = wp_safe_remote_get(
+        'http://127.0.0.1:5173/@vite/client',
+        [
+            'timeout'   => 0.1,
+            'sslverify' => false,
+        ]
+    );
 
-    if (!is_resource($connection)) {
-        return false;
-    }
-
-    fclose($connection);
-
-    return true;
+    return ! is_wp_error($response) && 200 === wp_remote_retrieve_response_code($response);
 }
 
 add_action('wp_enqueue_scripts', function (): void {
