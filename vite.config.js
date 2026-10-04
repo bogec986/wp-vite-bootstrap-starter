@@ -10,7 +10,7 @@ export default defineConfig({
     base: './',
 
     plugins: [
-        LiveReload(`${__dirname}/**/*.php`),
+        LiveReload(__dirname + '/**/*.php'),
     ],
 
     build: {
@@ -39,8 +39,14 @@ export default defineConfig({
         strictPort: true,
         cors: true,
 
+        watch: {
+            usePolling: true,
+            interval: 100,
+        },
+
         hmr: {
             host: '127.0.0.1',
+            protocol: 'ws',
         },
     },
 });
