@@ -40,8 +40,11 @@
                     ?>
                 </div>
             <?php endwhile; ?>
-                <?php comments_template(); ?>
- class="col-lg-4">
+
+            <?php comments_template(); ?>
+        </article>
+
+        <aside class="col-lg-4">
             <?php get_sidebar(); ?>
         </aside>
     </div>
