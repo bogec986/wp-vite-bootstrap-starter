@@ -10,7 +10,9 @@ export default defineConfig({
     base: './',
 
     plugins: [
-        LiveReload(__dirname + '/**/*.php'),
+        LiveReload(__dirname + '/**/*.php', {
+            alwaysReload: true,
+        }),
     ],
 
     build: {
