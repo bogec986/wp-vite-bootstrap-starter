@@ -14,58 +14,53 @@ add_action('wp_enqueue_scripts', function (): void {
         true
     );
 
-    if (!is_array($manifest) || empty($manifest['resources/js/app.js'])) {
+    $entry_key = 'resources/js/app.js';
+
+    if (
+        !is_array($manifest) ||
+        empty($manifest[$entry_key]) ||
+        !is_array($manifest[$entry_key])
+    ) {
         return;
     }
 
-    $entry_key = 'resources/js/app.js';
     $entry = $manifest[$entry_key];
 
-    $css_files = [];
-    $visited = [];
-
-    $collect_css = static function (string $key) use (&$collect_css, &$css_files, &$visited, $manifest): void {
-        if (isset($visited[$key]) || empty($manifest[$key]) || !is_array($manifest[$key])) {
-            return;
-        }
-
-        $visited[$key] = true;
-        $chunk = $manifest[$key];
-
-        if (!empty($chunk['css']) && is_array($chunk['css'])) {
-            foreach ($chunk['css'] as $css_file) {
-                if (is_string($css_file) && $css_file !== '') {
-                    $css_files[] = ltrim($css_file, '/');
-                }
+    if (!empty($entry['css']) && is_array($entry['css'])) {
+        foreach ($entry['css'] as $index => $css_file) {
+            if (!is_string($css_file) || $css_file === '') {
+                continue;
             }
-        }
 
-        if (!empty($chunk['imports']) && is_array($chunk['imports'])) {
-            foreach ($chunk['imports'] as $import_key) {
-                if (is_string($import_key) && $import_key !== '') {
-                    $collect_css($import_key);
-                }
+            $css_file = ltrim($css_file, '/');
+            $css_path = get_theme_file_path('/dist/' . $css_file);
+
+            if (!is_readable($css_path)) {
+                continue;
             }
+
+            $handle = $index === 0
+                ? 'wp-starter-app'
+                : 'wp-starter-fonts';
+
+            wp_enqueue_style(
+                $handle,
+                get_theme_file_uri('/dist/' . $css_file),
+                [],
+                (string) filemtime($css_path)
+            );
         }
-    };
-
-    $collect_css($entry_key);
-
-    foreach (array_values(array_unique($css_files)) as $index => $css_file) {
-        wp_enqueue_style(
-            'wp-starter-' . $index,
-            get_theme_file_uri('/dist/' . $css_file),
-            [],
-            wp_get_theme()->get('Version')
-        );
     }
 
-    if (!empty($entry['file'])) {
+    if (!empty($entry['file']) && is_string($entry['file'])) {
+        $js_file = ltrim($entry['file'], '/');
+        $js_path = get_theme_file_path('/dist/' . $js_file);
+
         wp_enqueue_script(
             'wp-starter-app',
-            get_theme_file_uri('/dist/' . ltrim($entry['file'], '/')),
+            get_theme_file_uri('/dist/' . $js_file),
             [],
-            wp_get_theme()->get('Version'),
+            is_readable($js_path) ? (string) filemtime($js_path) : null,
             true
         );
     }
