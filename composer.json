@@ -1,0 +1,12 @@
+{
+  "name": "wp-starter/theme",
+  "description": "Production-ready WordPress starter theme",
+  "type": "wordpress-theme",
+  "require": {
+    "php": ">=8.1",
+    "htmlburger/carbon-fields": "^3.6.11"
+  },
+  "config": {
+    "optimize-autoloader": true
+  }
+}

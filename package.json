@@ -1,0 +1,22 @@
+{
+  "name": "wp-starter",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "watch": "vite build --watch"
+  },
+  "dependencies": {
+    "bootstrap": "5.3.8"
+  },
+  "devDependencies": {
+    "@fontsource/oswald": "^5.3.0",
+    "@fontsource/roboto": "^5.3.0",
+    "sass": "^1.93.2",
+    "terser": "^5.51.2",
+    "vite": "^8.3.2",
+    "vite-plugin-live-reload": "^3.1.0"
+  }
+}

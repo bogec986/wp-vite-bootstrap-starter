@@ -1,0 +1,16 @@
+# Node i Composer zavisnosti (NE idu na GitHub)
+node_modules/
+vendor/
+
+# Lokalne Vite i sistemske datoteke
+.vite/
+dist/
+.DS_Store
+Thumbs.db
+
+# Logovi i privremeni fajlovi
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+composer.lock
+package-lock.json
