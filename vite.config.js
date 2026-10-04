@@ -6,8 +6,8 @@ import LiveReload from 'vite-plugin-live-reload';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export default defineConfig({
-    base: './',
+export default defineConfig(({ command }) => ({
+    base: command === 'serve' ? '/' : './',
 
     plugins: [
         LiveReload(__dirname + '/**/*.php', {
@@ -51,4 +51,4 @@ export default defineConfig({
             protocol: 'ws',
         },
     },
-});
+}));
