@@ -18,3 +18,34 @@ Copyright (C) 2026 WP Starter
 This theme is licensed under the GNU General Public License v2 or later.
 See the license URI for details.
 */
+
+/*
+ * WordPress core generated classes.
+ */
+.wp-caption { max-width: 100%; }
+.wp-caption-text { margin-top: 0.5rem; }
+.gallery-caption { display: block; }
+.bypostauthor { display: block; }
+.alignright { float: right; margin-left: 1.5rem; }
+.alignleft { float: left; margin-right: 1.5rem; }
+.aligncenter { display: block; margin-right: auto; margin-left: auto; }
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal !important;
+}
+.screen-reader-text:focus {
+    clip: auto;
+    clip-path: none;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    width: auto;
+}
