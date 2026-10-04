@@ -12,7 +12,15 @@
     </h2>
 
     <div class="text-body-secondary small mb-3">
-        <?php echo esc_html(get_the_date()); ?>
+        <time datetime="<?php echo esc_attr(get_the_date(DATE_W3C)); ?>">
+            <?php echo esc_html(get_the_date()); ?>
+        </time>
+
+        <?php if (has_tag()) : ?>
+            <span class="ms-2">
+                <?php the_tags('', ', ', ''); ?>
+            </span>
+        <?php endif; ?>
     </div>
 
     <div class="entry-summary">
