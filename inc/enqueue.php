@@ -2,7 +2,49 @@
 
 declare(strict_types=1);
 
+function wp_starter_vite_dev_enabled(): bool
+{
+    $environment = function_exists('wp_get_environment_type')
+        ? wp_get_environment_type()
+        : 'production';
+
+    $enabled = in_array($environment, ['local', 'development'], true);
+
+    return (bool) apply_filters('wp_starter_vite_dev_enabled', $enabled);
+}
+
+function wp_starter_vite_dev_server_available(): bool
+{
+    $connection = @fsockopen('127.0.0.1', 5173, $error_code, $error_message, 0.1);
+
+    if (!is_resource($connection)) {
+        return false;
+    }
+
+    fclose($connection);
+
+    return true;
+}
+
 add_action('wp_enqueue_scripts', function (): void {
+    if (wp_starter_vite_dev_enabled() && wp_starter_vite_dev_server_available()) {
+        wp_enqueue_script_module(
+            'wp-starter-vite-client',
+            'http://127.0.0.1:5173/@vite/client',
+            [],
+            null
+        );
+
+        wp_enqueue_script_module(
+            'wp-starter-app',
+            'http://127.0.0.1:5173/resources/js/app.js',
+            ['wp-starter-vite-client'],
+            null
+        );
+
+        return;
+    }
+
     $manifest_path = get_theme_file_path('/dist/.vite/manifest.json');
 
     if (!is_readable($manifest_path)) {
