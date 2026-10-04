@@ -24,7 +24,33 @@ add_action('after_setup_theme', function (): void {
     ]);
     add_theme_support('responsive-embeds');
     add_theme_support('editor-styles');
-    add_editor_style('dist/editor.css');
+
+    $manifest_path = get_theme_file_path('/dist/.vite/manifest.json');
+
+    if (is_readable($manifest_path)) {
+        $manifest = json_decode(
+            (string) file_get_contents($manifest_path),
+            true
+        );
+
+        if (is_array($manifest) && !empty($manifest['resources/js/editor.js'])) {
+            $entry = $manifest['resources/js/editor.js'];
+
+            if (!empty($entry['css']) && is_array($entry['css'])) {
+                $editor_styles = [];
+
+                foreach ($entry['css'] as $css_file) {
+                    if (is_string($css_file) && $css_file !== '') {
+                        $editor_styles[] = ltrim($css_file, '/');
+                    }
+                }
+
+                if ($editor_styles !== []) {
+                    add_editor_style($editor_styles);
+                }
+            }
+        }
+    }
 
     register_nav_menus([
         'primary' => __('Primary Menu', 'wp-starter'),
