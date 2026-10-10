@@ -76,7 +76,7 @@ add_action('after_setup_theme', function (): void {
 
                 foreach ($entry['css'] as $css_file) {
                     if (is_string($css_file) && $css_file !== '') {
-                        $editor_styles[] = ltrim($css_file, '/');
+                        $editor_styles[] = 'dist/' . ltrim($css_file, '/');
                     }
                 }
 
