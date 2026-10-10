@@ -152,6 +152,33 @@ function wp_starter_bootstrap_core_block_classes(string $block_content, array $b
             $block_content = wp_starter_add_block_classes($block_content, 'img', ['img-fluid'], true);
             break;
 
+        case 'core/accordion':
+            $block_content = wp_starter_add_block_classes($block_content, 'div', ['accordion']);
+            break;
+
+        case 'core/accordion-item':
+            $block_content = wp_starter_add_block_classes($block_content, 'div', ['accordion-item']);
+            break;
+
+        case 'core/accordion-heading':
+            $block_content = wp_starter_add_block_classes($block_content, 'h1', ['accordion-header']);
+            $block_content = wp_starter_add_block_classes($block_content, 'h2', ['accordion-header']);
+            $block_content = wp_starter_add_block_classes($block_content, 'h3', ['accordion-header']);
+            $block_content = wp_starter_add_block_classes($block_content, 'h4', ['accordion-header']);
+            $block_content = wp_starter_add_block_classes($block_content, 'h5', ['accordion-header']);
+            $block_content = wp_starter_add_block_classes($block_content, 'h6', ['accordion-header']);
+
+            $heading_classes = !empty($attrs['openByDefault'])
+                ? ['accordion-button']
+                : ['accordion-button', 'collapsed'];
+
+            $block_content = wp_starter_add_block_classes($block_content, 'button', $heading_classes);
+            break;
+
+        case 'core/accordion-panel':
+            $block_content = wp_starter_add_block_classes($block_content, 'div', ['accordion-collapse', 'accordion-body']);
+            break;
+
         case 'core/details':
             if (str_contains($class_name, 'is-style-bootstrap-accordion')) {
                 $block_content = wp_starter_add_block_classes($block_content, 'details', ['accordion', 'accordion-item']);
