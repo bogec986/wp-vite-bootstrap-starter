@@ -1,4 +1,20 @@
 // Bootstrap overrides.
 // Add project-specific variables before importing Bootstrap.
 
+// Font families.
+$font-family-sans-serif: 'Roboto', sans-serif;
+$font-family-base: $font-family-sans-serif;
+$headings-font-family: 'Roboto Condensed', sans-serif;
+
+// Font weights.
+$font-weight-lighter: 300;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-bolder: 700;
+
+$headings-font-weight: $font-weight-medium;
+
 $enable-smooth-scroll: true;
