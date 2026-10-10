@@ -58,3 +58,58 @@ h6 {
     margin-right: auto;
     margin-left: auto;
 }
+
+/* Primary navigation. */
+.site-header {
+    .navbar-nav {
+        gap: 0.25rem;
+
+        .menu-item > a {
+            display: block;
+            padding: 0.625rem 0.875rem;
+            border-radius: var(--bs-border-radius);
+            color: var(--bs-navbar-color);
+            font-weight: $font-weight-medium;
+            line-height: 1.4;
+            text-decoration: none;
+            transition:
+                color 150ms ease-in-out,
+                background-color 150ms ease-in-out;
+
+            &:hover {
+                color: var(--bs-navbar-hover-color);
+                background-color: rgba(var(--bs-emphasis-color-rgb), 0.05);
+            }
+
+            &:focus-visible {
+                outline: 2px solid var(--bs-primary);
+                outline-offset: 2px;
+            }
+        }
+
+        .current-menu-item > a,
+        .current_page_item > a,
+        .current-menu-ancestor > a,
+        .current_page_ancestor > a {
+            color: var(--bs-primary);
+            background-color: rgba(var(--bs-primary-rgb), 0.08);
+        }
+    }
+
+    .navbar-toggler {
+        border-radius: var(--bs-border-radius);
+    }
+}
+
+@media (min-width: 992px) {
+    .site-header .navbar-nav {
+        align-items: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-header .navbar-nav .menu-item > a {
+        transition: none;
+    }
+}
+
