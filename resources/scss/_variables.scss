@@ -1,5 +1,5 @@
 // Bootstrap overrides.
-// Keep shared typography settings here, before importing Bootstrap.
+// Keep shared typography and component settings here, before importing Bootstrap.
 
 // Font families.
 $font-family-sans-serif: 'Roboto', sans-serif;
@@ -16,6 +16,13 @@ $font-weight-bold: 700;
 $font-weight-bolder: 700;
 $font-weight-base: $font-weight-normal;
 $headings-font-weight: $font-weight-medium;
+
+// Navbar link spacing. Override these Bootstrap variables to adjust nav padding.
+$navbar-nav-link-padding-x: 0.5rem;
+$navbar-nav-link-padding-y: 0.5rem;
+
+// Use Bootstrap's standard nav-link transition; customize via Bootstrap variables if needed.
+$nav-link-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 
 // Project defaults.
 $enable-smooth-scroll: true;
