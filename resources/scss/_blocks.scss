@@ -6,8 +6,17 @@
     --bs-gutter-y: 1.5rem;
 }
 
+.wp-block-columns.row.is-layout-flex {
+    flex-wrap: wrap;
+}
+
 .wp-block-columns.row > .wp-block-column.col {
     min-width: 0;
+    flex: 1 0 0%;
+}
+
+.wp-block-columns.row > .wp-block-column[class*="col-md-"] {
+    flex: 0 0 auto;
 }
 
 /* The native Details block keeps its accessible, browser-provided toggle behavior. */
