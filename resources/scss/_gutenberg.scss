@@ -1,0 +1,31 @@
+/*
+ * Minimal compatibility rules for native Gutenberg blocks.
+ * Keep core block markup and behavior intact.
+ */
+
+.wp-block-image img,
+.wp-block-post-featured-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.wp-block-embed,
+.wp-block-embed__wrapper {
+    max-width: 100%;
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link {
+    color: inherit;
+    background-color: transparent;
+    border: $border-width solid currentColor;
+    padding: $btn-padding-y $btn-padding-x;
+    border-radius: $btn-border-radius;
+    text-decoration: none;
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link:hover,
+.wp-block-button.is-style-outline .wp-block-button__link:focus-visible {
+    color: var(--wp--preset--color--contrast, currentColor);
+    background-color: transparent;
+    border-color: currentColor;
+}
