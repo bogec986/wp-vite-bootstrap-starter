@@ -29,6 +29,8 @@
                     <?php endif; ?>
                 </header>
 
+                <?php get_template_part('template-parts/post-meta'); ?>
+
                 <div class="entry-content">
                     <?php the_content(); ?>
 
