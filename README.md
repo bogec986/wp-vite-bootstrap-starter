@@ -163,6 +163,8 @@ wp-starter/
 ├── template-parts/
 │   └── content.php
 ├── 404.php
+├── archive.php
+├── search.php
 ├── composer.json
 ├── functions.php
 ├── header.php
@@ -392,6 +394,4 @@ The theme is intended to be extended rather than treated as a finished design sy
 
 ## License
 
-This project is intended as a starter theme for custom WordPress development.
-
-Add or replace this section with the license required by your project or distribution model.
+WP Starter is licensed under the GNU General Public License v2 or later. See [LICENSE](https://www.gnu.org/licenses/gpl-2.0.html) for the license terms.
