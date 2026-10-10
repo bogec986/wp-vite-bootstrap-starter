@@ -86,9 +86,9 @@ function wp_starter_bootstrap_core_block_classes(string $block_content, array $b
 
     switch ($block_name) {
         case 'core/group':
-            if (str_contains($class_name, 'is-style-bootstrap-container-fluid')) {
+            if (str_contains($class_name, 'is-style-bootstrap-container-fluid') || str_contains($block_content, 'is-style-bootstrap-container-fluid')) {
                 $block_content = wp_starter_add_block_classes($block_content, 'div', ['container-fluid']);
-            } elseif (str_contains($class_name, 'is-style-bootstrap-container')) {
+            } elseif (str_contains($class_name, 'is-style-bootstrap-container') || str_contains($block_content, 'is-style-bootstrap-container')) {
                 $block_content = wp_starter_add_block_classes($block_content, 'div', ['container']);
             }
             break;
@@ -129,13 +129,13 @@ function wp_starter_bootstrap_core_block_classes(string $block_content, array $b
         case 'core/button':
             $button_classes = ['btn', 'btn-primary'];
 
-            if (str_contains($class_name, 'is-style-outline')) {
+            if (str_contains($class_name, 'is-style-outline') || str_contains($block_content, 'is-style-outline')) {
                 $button_classes = ['btn', 'btn-outline-primary'];
-            } elseif (str_contains($class_name, 'is-style-secondary')) {
+            } elseif (str_contains($class_name, 'is-style-secondary') || str_contains($block_content, 'is-style-secondary')) {
                 $button_classes = ['btn', 'btn-secondary'];
-            } elseif (str_contains($class_name, 'is-style-success')) {
+            } elseif (str_contains($class_name, 'is-style-success') || str_contains($block_content, 'is-style-success')) {
                 $button_classes = ['btn', 'btn-success'];
-            } elseif (str_contains($class_name, 'is-style-danger')) {
+            } elseif (str_contains($class_name, 'is-style-danger') || str_contains($block_content, 'is-style-danger')) {
                 $button_classes = ['btn', 'btn-danger'];
             }
 
@@ -180,7 +180,7 @@ function wp_starter_bootstrap_core_block_classes(string $block_content, array $b
             break;
 
         case 'core/details':
-            if (str_contains($class_name, 'is-style-bootstrap-accordion')) {
+            if (str_contains($class_name, 'is-style-bootstrap-accordion') || str_contains($block_content, 'is-style-bootstrap-accordion')) {
                 $block_content = wp_starter_add_block_classes($block_content, 'details', ['accordion', 'accordion-item']);
                 $block_content = wp_starter_add_block_classes($block_content, 'summary', ['accordion-button', 'collapsed']);
             }
