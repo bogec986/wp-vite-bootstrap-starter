@@ -189,6 +189,7 @@ The integration is loaded from `inc/bootstrap-blocks.php` and currently supports
 - **Columns / Column** — adds Bootstrap `row`, gutter, and `col` classes. Column widths that match Bootstrap's 12-column grid are mapped to responsive `col-md-*` classes.
 - **Buttons** — maps the core Button block to `btn btn-primary`; the existing Outline style maps to `btn btn-outline-primary`. Secondary, Success, and Danger style classes are also recognized.
 - **Image / Gallery** — adds `img-fluid` to images and Bootstrap figure classes to image captions.
+- **Accordion** — native `core/accordion`, item, heading, and panel blocks receive Bootstrap accordion classes while WordPress continues to manage their interaction state.
 - **Details** — choose the *Bootstrap Accordion Item* style for a native `details/summary` disclosure styled with Bootstrap accordion variables. It keeps native keyboard and browser disclosure behavior.
 
 The original Gutenberg blocks remain available and their saved content is not modified, so existing posts remain editable. These class adjustments apply to frontend rendering; the editor remains WordPress's native block editor.
