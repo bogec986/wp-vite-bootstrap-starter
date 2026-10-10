@@ -7,6 +7,34 @@
       "wideSize": "1200px"
     },
     "spacing": {
+      "blockGap": true,
+      "spacingSizes": [
+        {
+          "name": "Extra small",
+          "size": "0.5rem",
+          "slug": "xs"
+        },
+        {
+          "name": "Small",
+          "size": "1rem",
+          "slug": "sm"
+        },
+        {
+          "name": "Medium",
+          "size": "1.5rem",
+          "slug": "md"
+        },
+        {
+          "name": "Large",
+          "size": "2rem",
+          "slug": "lg"
+        },
+        {
+          "name": "Extra large",
+          "size": "3rem",
+          "slug": "xl"
+        }
+      ],
       "units": ["px", "em", "rem", "%", "vw"]
     },
     "typography": {
@@ -49,6 +77,9 @@
     }
   },
   "styles": {
+    "spacing": {
+      "blockGap": "1.5rem"
+    },
     "typography": {
       "fontFamily": "var(--wp--preset--font-family--roboto)",
       "fontSize": "1rem",
