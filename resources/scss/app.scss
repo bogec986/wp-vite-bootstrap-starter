@@ -3,6 +3,7 @@
 
 body {
     font-family: $font-family-base;
+    font-weight: $font-weight-base;
 }
 
 h1,
@@ -12,6 +13,16 @@ h4,
 h5,
 h6 {
     font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+}
+
+// Bootstrap does not provide these two weight utilities by default.
+.fw-medium {
+    font-weight: $font-weight-medium !important;
+}
+
+.fw-semibold {
+    font-weight: $font-weight-semibold !important;
 }
 
 
