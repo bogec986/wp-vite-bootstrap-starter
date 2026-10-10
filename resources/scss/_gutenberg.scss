@@ -22,10 +22,3 @@
     border-radius: $btn-border-radius;
     text-decoration: none;
 }
-
-.wp-block-button.is-style-outline .wp-block-button__link:hover,
-.wp-block-button.is-style-outline .wp-block-button__link:focus-visible {
-    color: var(--wp--preset--color--contrast, currentColor);
-    background-color: transparent;
-    border-color: currentColor;
-}
