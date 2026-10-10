@@ -2,7 +2,8 @@
 @import "bootstrap/scss/bootstrap";
 
 .editor-styles-wrapper {
-    font-family: var(--bs-body-font-family);
+    font-family: $font-family-base;
+    font-weight: $font-weight-normal;
     color: var(--bs-body-color);
     background: var(--bs-body-bg);
 }
@@ -14,5 +15,6 @@
 .editor-styles-wrapper h5,
 .editor-styles-wrapper h6,
 .editor-styles-wrapper .editor-post-title {
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
 }
