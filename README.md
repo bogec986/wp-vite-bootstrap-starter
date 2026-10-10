@@ -54,6 +54,15 @@ Then activate **WP Starter** in WordPress or with WP-CLI:
 wp theme activate wp-starter
 ```
 
+## Documentation
+
+Detailed guides are available in the [docs](docs/) directory:
+
+- [Getting Started](docs/getting-started.md) — installation, local development, WordPress setup, and troubleshooting.
+- [Theme Structure](docs/theme-structure.md) — template hierarchy, PHP modules, post listings, and the Bootstrap approach.
+- [Assets and Customization](docs/assets-and-customization.md) — Vite, Sass, fonts, Gutenberg, and optional Carbon Fields.
+- [Production Deployment](docs/deployment.md) — build output, deployment requirements, and release checklist.
+
 ## Development
 
 Start the Vite development server:
