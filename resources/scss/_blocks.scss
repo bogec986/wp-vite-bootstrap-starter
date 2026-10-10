@@ -52,3 +52,16 @@
 .wp-block-details.is-style-bootstrap-accordion[open] > summary::after {
     transform: var(--bs-accordion-btn-icon-transform);
 }
+
+/* WordPress's native Accordion keeps control of its own interaction state. */
+.wp-block-accordion .wp-block-accordion-heading.accordion-header {
+    margin: 0;
+}
+
+.wp-block-accordion .wp-block-accordion-heading__toggle.accordion-button {
+    text-align: left;
+}
+
+.wp-block-accordion .wp-block-accordion-heading__toggle-icon {
+    display: none;
+}
