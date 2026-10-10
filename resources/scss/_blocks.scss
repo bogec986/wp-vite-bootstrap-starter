@@ -65,3 +65,12 @@
 .wp-block-accordion .wp-block-accordion-heading__toggle-icon {
     display: none;
 }
+
+.wp-block-accordion .wp-block-accordion-heading__toggle.accordion-button[aria-expanded="true"] {
+    color: var(--bs-accordion-active-color);
+    background-color: var(--bs-accordion-active-bg);
+}
+
+.wp-block-accordion .wp-block-accordion-heading__toggle.accordion-button[aria-expanded="true"]::after {
+    transform: var(--bs-accordion-btn-icon-transform);
+}
