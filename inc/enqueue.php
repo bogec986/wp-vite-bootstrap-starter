@@ -15,11 +15,13 @@ function wp_starter_vite_dev_enabled(): bool
 
 function wp_starter_vite_dev_server_available(): bool
 {
-    $response = wp_safe_remote_get(
+    // This URL is hard-coded and points to the local Vite server, so use wp_remote_get
+    // instead of wp_safe_remote_get, which can reject loopback/private addresses.
+    $response = wp_remote_get(
         'http://127.0.0.1:5173/@vite/client',
         [
-            'timeout'   => 0.1,
-            'sslverify' => false,
+            'timeout'     => 0.5,
+            'redirection' => 0,
         ]
     );
 
@@ -98,12 +100,11 @@ add_action('wp_enqueue_scripts', function (): void {
         $js_file = ltrim($entry['file'], '/');
         $js_path = get_theme_file_path('/dist/' . $js_file);
 
-        wp_enqueue_script(
+        wp_enqueue_script_module(
             'wp-starter-app',
             get_theme_file_uri('/dist/' . $js_file),
             [],
-            is_readable($js_path) ? (string) filemtime($js_path) : null,
-            true
+            is_readable($js_path) ? (string) filemtime($js_path) : null
         );
     }
 }, 20);
