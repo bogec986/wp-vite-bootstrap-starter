@@ -264,6 +264,19 @@ The theme registers:
 - Footer Menu
 - Main Sidebar
 
+## Template Parts and Post Listings
+
+Post listings in the archive, index, and search templates use a responsive Bootstrap card grid:
+
+- One card per row on small screens
+- Two cards per row from the `md` breakpoint
+- Consistent card heights within each grid row
+- Featured image, title, date, category, excerpt, and a Read more link when available
+
+The reusable listing card lives in `template-parts/content.php`. Shared date/category metadata lives in `template-parts/post-meta.php` and is also used by the single-post template. This keeps common presentation in one place while leaving page and post layouts under classic PHP template control.
+
+To change the listing design, start with these template parts rather than duplicating markup across archive, index, and search templates.
+
 ## Helpers
 
 Reusable theme helpers are located in:
