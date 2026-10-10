@@ -107,8 +107,8 @@ Production JavaScript is minified with Terser and `console` statements are remov
 
 | Command | Description |
 |---|---|
-| `npm run dev` | Start Vite development server |
-| `npm run watch` | Alias for the Vite development server |
+| `npm run dev` | Start the Vite development server |
+| `npm run watch` | Build assets in watch mode |
 | `npm run build` | Create the production build |
 
 ## Asset Workflow
@@ -117,29 +117,11 @@ The theme has two asset modes.
 
 ### Development
 
-When the WordPress environment is `local` or `development` and Vite is available:
-
-```text
-WordPress
-    ↓
-Vite development server
-    ↓
-resources/js/app.js
-    ↓
-HMR
-```
-
-The theme loads the Vite client and application entry point from `127.0.0.1:5173`.
+When the WordPress environment is `local` or `development` and Vite is available, WordPress loads the Vite client and application entry point from `127.0.0.1:5173`. This enables HMR, PHP Live Reload, and fast frontend iteration.
 
 ### Production
 
-When Vite is not available, WordPress loads the files generated in `dist/` using:
-
-```text
-dist/.vite/manifest.json
-```
-
-This keeps development tooling out of the production asset workflow.
+When Vite is not available, WordPress loads the files generated in `dist/` using `dist/.vite/manifest.json`. This keeps development tooling out of the production asset workflow.
 
 ## Project Structure
 
@@ -161,8 +143,10 @@ wp-starter/
 │       ├── app.scss
 │       └── editor.scss
 ├── template-parts/
-│   └── content.php
+│   ├── content.php
+│   └── post-meta.php
 ├── archive.php
+├── front-page.php
 ├── footer.php
 ├── functions.php
 ├── header.php
@@ -179,35 +163,13 @@ wp-starter/
 
 ## JavaScript
 
-The main frontend entry point is:
-
-```text
-resources/js/app.js
-```
-
-The block editor entry point is:
-
-```text
-resources/js/editor.js
-```
-
-Bootstrap JavaScript is loaded through the main application entry point.
+The main frontend entry point is `resources/js/app.js`. The block editor entry point is `resources/js/editor.js`. Bootstrap JavaScript is loaded through the main application entry point.
 
 ## CSS and Sass
 
-The main stylesheet is:
+The main stylesheet is `resources/scss/app.scss`. Bootstrap is imported through Sass, allowing Bootstrap variables and components to be customized before compilation.
 
-```text
-resources/scss/app.scss
-```
-
-Bootstrap is imported through Sass, allowing Bootstrap variables and components to be customized before compilation.
-
-The editor stylesheet is:
-
-```text
-resources/scss/editor.scss
-```
+The editor stylesheet is `resources/scss/editor.scss`.
 
 ### Typography
 
@@ -216,9 +178,7 @@ The theme uses:
 - **Roboto** for body text
 - **Roboto Condensed** for headings and display typography
 
-Fonts are bundled through Fontsource rather than loaded from an external CDN.
-
-This keeps font assets under the theme's own build pipeline and avoids unnecessary third-party font requests.
+Fonts are bundled through Fontsource rather than loaded from an external CDN. This keeps font assets under the theme's build pipeline and avoids unnecessary third-party font requests.
 
 ## Native Gutenberg Support
 
@@ -233,21 +193,11 @@ The `theme.json` file defines these layout defaults:
 
 These settings provide native width and spacing controls for blocks such as Group and Columns, including the Wide alignment option. Actual layout still depends on the alignment and layout settings selected for each block in the editor.
 
-Minimal compatibility styles for core blocks are maintained in:
-
-```text
-resources/scss/_gutenberg.scss
-```
-
-The same partial is imported by both frontend and editor Sass so the Outline button style and basic image/embed sizing remain consistent. Validate frontend/editor parity after changing theme styles or adding plugins.
+Minimal compatibility styles for core blocks are maintained in `resources/scss/_gutenberg.scss`. The same partial is imported by both frontend and editor Sass so the Outline button style and basic image/embed sizing remain consistent. Validate frontend/editor parity after changing theme styles or adding plugins.
 
 ## WordPress Setup
 
-Theme initialization is handled by:
-
-```text
-inc/setup.php
-```
+Theme initialization is handled by `inc/setup.php`.
 
 The theme enables:
 
@@ -269,30 +219,19 @@ The theme registers:
 The `front-page.php` template supports both WordPress homepage modes:
 
 - **A static front page:** renders the selected page's title and content.
-- **Your latest posts:** renders the post listing with the shared Bootstrap card grid, pagination, and sidebar.
+- **Your latest posts:** renders the main post query with pagination and the sidebar.
 
-Choose the desired mode under **Settings → Reading** in WordPress. The template checks the main query rather than creating a separate custom query, so WordPress pagination and the configured posts-per-page setting remain in effect.
+Choose the desired mode under **Settings → Reading** in WordPress. The template uses the main query, so WordPress pagination and the configured posts-per-page setting remain in effect.
 
 ## Template Parts and Post Listings
 
-Post listings in the archive, index, and search templates use a responsive Bootstrap card grid:
+Archive, index, search, and latest-posts templates share the markup in `template-parts/content.php`. It uses semantic article markup and a small set of Bootstrap utilities; it does not enforce a card design or a multi-column post grid. Change the markup or add a Bootstrap component at project level when the design calls for it.
 
-- One card per row on small screens
-- Two cards per row from the `md` breakpoint
-- Consistent card heights within each grid row
-- Featured image, title, date, category, excerpt, and a Read more link when available
-
-The reusable listing card lives in `template-parts/content.php`. Shared date/category metadata lives in `template-parts/post-meta.php` and is also used by the single-post template. This keeps common presentation in one place while leaving page and post layouts under classic PHP template control.
-
-To change the listing design, start with these template parts rather than duplicating markup across archive, index, and search templates.
+Date and category metadata is shared through `template-parts/post-meta.php`, which is also used by the single-post template. These two template parts exist to avoid duplicating markup that is used in multiple places.
 
 ## Helpers
 
-Reusable theme helpers are located in:
-
-```text
-inc/helpers.php
-```
+Reusable theme helpers are located in `inc/helpers.php`.
 
 Examples include:
 
@@ -309,28 +248,24 @@ Archive, index, and search templates use `wp_starter_posts_pagination()` to rend
 
 ## Carbon Fields
 
-Carbon Fields is installed through Composer:
+Carbon Fields is an optional extension for projects that need custom fields. Install it through Composer when required:
 
 ```bash
 composer require htmlburger/carbon-fields
 ```
 
-The theme checks for the Composer autoloader before booting Carbon Fields.
-
-Safe wrappers are available for theme options and post metadata:
+The theme checks for the Composer autoloader before booting Carbon Fields. Safe wrappers are available for theme options and post metadata:
 
 ```php
 wp_starter_carbon_theme_option()
 wp_starter_carbon_post_meta()
 ```
 
+When Carbon Fields is installed, the starter currently registers these example fields:
+
 ### Theme Options
 
-Available under:
-
-**Appearance → Theme Options**
-
-Current fields include:
+Available under **Appearance → Theme Options**:
 
 - Phone
 - Email
@@ -344,45 +279,19 @@ For standard posts:
 - Subtitle
 - Hero image
 
+Remove or adapt these example fields for each client project.
+
 ## Head Optimization
 
-Basic WordPress-generated head noise is removed in:
-
-```text
-inc/head.php
-```
-
-The theme intentionally keeps functionality that can be useful for feeds, REST discovery, and plugin compatibility.
+Basic WordPress-generated head noise is removed in `inc/head.php`. The theme intentionally keeps functionality that can be useful for feeds, REST discovery, and plugin compatibility.
 
 ## Accessibility
 
-The starter theme includes accessibility-oriented defaults:
-
-- Semantic HTML
-- Accessible navigation labels
-- Keyboard-accessible mobile navigation
-- Skip-to-content link
-- Appropriate navigation ARIA attributes
-- Responsive layout
-- Editor styles matching frontend typography
-
-Accessibility should still be validated on the final project because content, plugins, and custom components can introduce additional issues.
+The starter includes accessibility-oriented defaults such as semantic HTML, accessible navigation labels, keyboard-accessible mobile navigation, a skip-to-content link, responsive layout, and editor styles matching frontend typography. Accessibility should still be validated on the final project because content, plugins, and custom components can introduce additional issues.
 
 ## Performance
 
-The theme is designed to keep the frontend lightweight.
-
-Production builds provide:
-
-- Minified JavaScript
-- Bundled CSS
-- Local font assets
-- No external Google Fonts dependency
-- No unnecessary development assets
-- Content-hashed Vite output
-- Manifest-based asset loading
-
-Additional optimization should be applied at project level depending on content, images, plugins, hosting, and caching.
+Production builds provide minified JavaScript, bundled CSS, local font assets, content-hashed Vite output, and manifest-based asset loading. Additional optimization should be applied at project level depending on content, images, plugins, hosting, and caching.
 
 ## Production Checklist
 
@@ -423,18 +332,19 @@ If the deployment environment does not run Node.js, deploy the generated `dist/`
 
 ## Development Philosophy
 
-This starter intentionally avoids unnecessary abstractions.
+This starter intentionally avoids unnecessary abstractions and fixed design decisions.
 
 The goal is to provide:
 
 1. A clean WordPress foundation
-2. A modern frontend build system
-3. Minimal dependencies
-4. Predictable development and production behavior
-5. Good accessibility defaults
-6. Easy customization for client projects
+2. Bootstrap 5 for layout utilities and components when needed
+3. A modern Vite/Sass build system
+4. Gutenberg for editing page content
+5. Optional Carbon Fields for project-specific custom fields
+6. Predictable development and production behavior
+7. Easy customization for client projects
 
-The theme is intended to be extended rather than treated as a finished design system.
+WordPress templates control page structure and content. Bootstrap supports the chosen design; it does not dictate it. The theme is a foundation to extend, not a finished design system.
 
 ## License
 
