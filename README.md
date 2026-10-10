@@ -296,7 +296,7 @@ wp_starter_posts_pagination()
 
 The Carbon Fields helpers safely return default values when Carbon Fields is not available.
 
-Archive and index templates use `wp_starter_posts_pagination()` to render WordPress pagination with Bootstrap 5 `pagination`, `page-item`, and `page-link` classes. The helper uses WordPress `paginate_links()` rather than implementing pagination logic itself.
+Archive, index, and search templates use `wp_starter_posts_pagination()` to render WordPress pagination with Bootstrap 5 `pagination`, `page-item`, and `page-link` classes. The helper uses WordPress `paginate_links()` rather than implementing pagination logic itself.
 
 ## Carbon Fields
 
