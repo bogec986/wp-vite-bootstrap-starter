@@ -3,7 +3,7 @@
 
 .editor-styles-wrapper {
     font-family: $font-family-base;
-    font-weight: $font-weight-normal;
+    font-weight: $font-weight-base;
     color: var(--bs-body-color);
     background: var(--bs-body-bg);
 }
@@ -17,4 +17,13 @@
 .editor-styles-wrapper .editor-post-title {
     font-family: $headings-font-family;
     font-weight: $headings-font-weight;
+}
+
+// Keep custom weight utilities consistent in the editor.
+.editor-styles-wrapper .fw-medium {
+    font-weight: $font-weight-medium !important;
+}
+
+.editor-styles-wrapper .fw-semibold {
+    font-weight: $font-weight-semibold !important;
 }
