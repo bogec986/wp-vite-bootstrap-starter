@@ -1,12 +1,12 @@
 // Bootstrap overrides.
-// Add project-specific variables before importing Bootstrap.
+// Keep shared typography settings here, before importing Bootstrap.
 
 // Font families.
 $font-family-sans-serif: 'Roboto', sans-serif;
 $font-family-base: $font-family-sans-serif;
 $headings-font-family: 'Roboto Condensed', sans-serif;
 
-// Font weights.
+// Font weights available from Fontsource.
 $font-weight-lighter: 300;
 $font-weight-light: 300;
 $font-weight-normal: 400;
@@ -14,7 +14,8 @@ $font-weight-medium: 500;
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 $font-weight-bolder: 700;
-
+$font-weight-base: $font-weight-normal;
 $headings-font-weight: $font-weight-medium;
 
+// Project defaults.
 $enable-smooth-scroll: true;
