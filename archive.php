@@ -16,7 +16,7 @@
                     <?php get_template_part('template-parts/content', get_post_type()); ?>
                 <?php endwhile; ?>
 
-                <?php the_posts_pagination(); ?>
+                <?php wp_starter_posts_pagination(); ?>
             <?php else : ?>
                 <p><?php esc_html_e('No content found.', 'wp-starter'); ?></p>
             <?php endif; ?>
