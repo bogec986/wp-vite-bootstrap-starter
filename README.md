@@ -12,7 +12,7 @@ The theme is designed as a clean foundation for custom WordPress projects withou
 - Vite-powered development workflow
 - Bootstrap 5.3
 - Sass support
-- Oswald and Roboto via Fontsource
+- Roboto and Roboto Condensed via Fontsource
 - Vite HMR during development
 - Automatic PHP Live Reload
 - Production asset manifest
@@ -216,11 +216,32 @@ resources/scss/editor.scss
 The theme uses:
 
 - **Roboto** for body text
-- **Oswald** for headings and display typography
+- **Roboto Condensed** for headings and display typography
 
 Fonts are bundled through Fontsource rather than loaded from an external CDN.
 
 This keeps font assets under the theme's own build pipeline and avoids unnecessary third-party font requests.
+
+## Native Gutenberg Support
+
+The theme keeps WordPress core block markup and behavior intact. It does not convert blocks to Bootstrap grid markup or replace the native block editor.
+
+The `theme.json` file defines these layout defaults:
+
+- **Content width:** 760px
+- **Wide width:** 1200px
+- **Default block gap:** 1.5rem
+- **Spacing presets:** 0.5rem, 1rem, 1.5rem, 2rem, and 3rem
+
+These settings provide native width and spacing controls for blocks such as Group and Columns, including the Wide alignment option. Actual layout still depends on the alignment and layout settings selected for each block in the editor.
+
+Minimal compatibility styles for core blocks are maintained in:
+
+```text
+resources/scss/_gutenberg.scss
+```
+
+The same partial is imported by both frontend and editor Sass so the Outline button style and basic image/embed sizing remain consistent. Validate frontend/editor parity after changing theme styles or adding plugins.
 
 ## WordPress Setup
 
