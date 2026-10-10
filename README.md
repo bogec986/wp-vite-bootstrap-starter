@@ -264,6 +264,15 @@ The theme registers:
 - Footer Menu
 - Main Sidebar
 
+## Front Page Template
+
+The `front-page.php` template supports both WordPress homepage modes:
+
+- **A static front page:** renders the selected page's title and content.
+- **Your latest posts:** renders the post listing with the shared Bootstrap card grid, pagination, and sidebar.
+
+Choose the desired mode under **Settings → Reading** in WordPress. The template checks the main query rather than creating a separate custom query, so WordPress pagination and the configured posts-per-page setting remain in effect.
+
 ## Template Parts and Post Listings
 
 Post listings in the archive, index, and search templates use a responsive Bootstrap card grid:
