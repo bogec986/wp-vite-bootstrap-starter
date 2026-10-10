@@ -59,52 +59,37 @@ h6 {
     margin-left: auto;
 }
 
-/* Primary navigation. */
-.site-header {
-    .navbar-nav {
-        gap: 0.25rem;
-
-        .menu-item > a {
-            display: block;
-            padding: 0.625rem 0.875rem;
-            border-radius: var(--bs-border-radius);
-            color: var(--bs-navbar-color);
-            font-weight: $font-weight-medium;
-            line-height: 1.4;
-            text-decoration: none;
-            transition:
-                color 150ms ease-in-out,
-                background-color 150ms ease-in-out;
-
-            &:hover {
-                color: var(--bs-navbar-hover-color);
-                background-color: rgba(var(--bs-emphasis-color-rgb), 0.05);
-            }
-
-            &:focus-visible {
-                outline: 2px solid var(--bs-primary);
-                outline-offset: 2px;
-            }
-        }
-
-        .current-menu-item > a,
-        .current_page_item > a,
-        .current-menu-ancestor > a,
-        .current_page_ancestor > a {
-            color: var(--bs-primary);
-            background-color: rgba(var(--bs-primary-rgb), 0.08);
-        }
-    }
-
-    .navbar-toggler {
-        border-radius: var(--bs-border-radius);
-    }
+/* Keep WordPress menu markup visually consistent with Bootstrap nav-links. */
+.site-header .navbar-nav .menu-item > a {
+    display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    color: var(--bs-nav-link-color);
+    font-size: var(--bs-nav-link-font-size);
+    font-weight: var(--bs-nav-link-font-weight);
+    text-decoration: none;
+    background: none;
+    border: 0;
+    transition:
+        color 0.15s ease-in-out,
+        background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out;
 }
 
-@media (min-width: 992px) {
-    .site-header .navbar-nav {
-        align-items: center;
-    }
+.site-header .navbar-nav .menu-item > a:hover,
+.site-header .navbar-nav .menu-item > a:focus-visible {
+    color: var(--bs-nav-link-hover-color);
+}
+
+.site-header .navbar-nav .current-menu-item > a,
+.site-header .navbar-nav .current_page_item > a,
+.site-header .navbar-nav .current-menu-ancestor > a,
+.site-header .navbar-nav .current_page_ancestor > a {
+    color: var(--bs-navbar-active-color);
+}
+
+.site-header .navbar-nav .menu-item > a:focus-visible {
+    outline: var(--bs-focus-ring-width) solid var(--bs-focus-ring-color);
+    outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -112,4 +97,3 @@ h6 {
         transition: none;
     }
 }
-
