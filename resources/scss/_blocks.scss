@@ -1,0 +1,45 @@
+/* Bootstrap-compatible styles for WordPress core block output. */
+
+/* Bootstrap's .row/.col utilities complement the existing core Columns blocks. */
+.wp-block-columns.row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 1.5rem;
+}
+
+.wp-block-columns.row > .wp-block-column.col {
+    min-width: 0;
+}
+
+/* The native Details block keeps its accessible, browser-provided toggle behavior. */
+.wp-block-details.is-style-bootstrap-accordion {
+    overflow: hidden;
+    border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color);
+    border-radius: var(--bs-accordion-border-radius);
+    color: var(--bs-accordion-color);
+    background-color: var(--bs-accordion-bg);
+}
+
+.wp-block-details.is-style-bootstrap-accordion > summary {
+    list-style: none;
+}
+
+.wp-block-details.is-style-bootstrap-accordion > summary::-webkit-details-marker {
+    display: none;
+}
+
+.wp-block-details.is-style-bootstrap-accordion > summary::marker {
+    content: "";
+}
+
+.wp-block-details.is-style-bootstrap-accordion > :not(summary) {
+    padding: var(--bs-accordion-body-padding-y) var(--bs-accordion-body-padding-x);
+}
+
+.wp-block-details.is-style-bootstrap-accordion[open] > summary {
+    color: var(--bs-accordion-active-color);
+    background-color: var(--bs-accordion-active-bg);
+}
+
+.wp-block-details.is-style-bootstrap-accordion[open] > summary::after {
+    transform: var(--bs-accordion-btn-icon-transform);
+}
