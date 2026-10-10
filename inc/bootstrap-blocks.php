@@ -206,6 +206,21 @@ function wp_starter_register_bootstrap_block_styles(): void
         'label' => __('Bootstrap Fluid Container', 'wp-starter'),
     ]);
 
+    register_block_style('core/button', [
+        'name'  => 'secondary',
+        'label' => __('Bootstrap Secondary', 'wp-starter'),
+    ]);
+
+    register_block_style('core/button', [
+        'name'  => 'success',
+        'label' => __('Bootstrap Success', 'wp-starter'),
+    ]);
+
+    register_block_style('core/button', [
+        'name'  => 'danger',
+        'label' => __('Bootstrap Danger', 'wp-starter'),
+    ]);
+
     register_block_style('core/details', [
         'name'  => 'bootstrap-accordion',
         'label' => __('Bootstrap Accordion Item', 'wp-starter'),
