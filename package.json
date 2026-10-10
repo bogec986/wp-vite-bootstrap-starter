@@ -12,8 +12,8 @@
     "bootstrap": "5.3.8"
   },
   "devDependencies": {
-    "@fontsource/oswald": "^5.3.0",
     "@fontsource/roboto": "^5.3.0",
+    "@fontsource/roboto-condensed": "^5.3.0",
     "sass": "^1.93.2",
     "terser": "^5.51.2",
     "vite": "^8.3.2",
