@@ -1,26 +1,28 @@
-<article <?php post_class('card h-100 shadow-sm'); ?>>
+<article <?php post_class('mb-4'); ?>>
     <?php if (has_post_thumbnail()) : ?>
-        <a href="<?php the_permalink(); ?>" class="d-block">
-            <?php the_post_thumbnail('large', ['class' => 'card-img-top img-fluid']); ?>
+        <a href="<?php the_permalink(); ?>" class="d-inline-block mb-3">
+            <?php the_post_thumbnail('large', ['class' => 'img-fluid']); ?>
         </a>
     <?php endif; ?>
 
-    <div class="card-body d-flex flex-column">
-        <h2 class="card-title h4">
-            <a class="text-decoration-none" href="<?php the_permalink(); ?>">
+    <header class="mb-2">
+        <h2 class="h3">
+            <a href="<?php the_permalink(); ?>" class="text-decoration-none">
                 <?php the_title(); ?>
             </a>
         </h2>
+    </header>
 
-        <?php get_template_part('template-parts/post-meta'); ?>
+    <?php get_template_part('template-parts/post-meta'); ?>
 
-        <div class="card-text entry-summary">
-            <?php the_excerpt(); ?>
-        </div>
+    <div class="entry-summary">
+        <?php the_excerpt(); ?>
+    </div>
 
-        <a class="btn btn-outline-primary mt-auto align-self-start" href="<?php the_permalink(); ?>">
+    <p class="mb-0">
+        <a href="<?php the_permalink(); ?>">
             <?php esc_html_e('Read more', 'wp-starter'); ?>
             <span class="visually-hidden"><?php the_title(); ?></span>
         </a>
-    </div>
+    </p>
 </article>
