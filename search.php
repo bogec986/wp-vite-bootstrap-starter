@@ -4,7 +4,7 @@
     <div class="row g-5">
         <div class="col-lg-8">
             <header class="mb-4">
-                <h1 class="display-5">
+                <h1>
                     <?php
                     printf(
                         esc_html__('Search results for: %s', 'wp-starter'),
