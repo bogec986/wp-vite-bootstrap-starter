@@ -64,7 +64,7 @@ function wp_starter_remove_column_flex_basis(string $html): string
     }
 
     $style = (string) preg_replace('/(?:^|;)\\s*flex-basis\\s*:\\s*[^;]+/i', '', $style);
-    $style = trim($style, " ;\\t\\n\\r\\0\\x0B");
+    $style = trim($style, " ;\t\n\r\0\x0B");
 
     $processor->set_attribute('style', $style);
 
