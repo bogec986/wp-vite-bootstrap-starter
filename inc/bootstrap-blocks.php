@@ -39,6 +39,39 @@ function wp_starter_add_block_classes(string $html, string $tag_name, array $cla
 }
 
 /**
+ * Remove the fixed flex-basis saved by the core Column block when a Bootstrap
+ * breakpoint class is available to control the width instead.
+ *
+ * @param string $html Rendered column HTML.
+ * @return string
+ */
+function wp_starter_remove_column_flex_basis(string $html): string
+{
+    if (!class_exists('WP_HTML_Tag_Processor') || $html === '') {
+        return $html;
+    }
+
+    $processor = new WP_HTML_Tag_Processor($html);
+
+    if (!$processor->next_tag('div')) {
+        return $html;
+    }
+
+    $style = $processor->get_attribute('style');
+
+    if (!is_string($style) || stripos($style, 'flex-basis') === false) {
+        return $html;
+    }
+
+    $style = (string) preg_replace('/(?:^|;)\\s*flex-basis\\s*:\\s*[^;]+/i', '', $style);
+    $style = trim($style, " ;\\t\\n\\r\\0\\x0B");
+
+    $processor->set_attribute('style', $style);
+
+    return $processor->get_updated_html();
+}
+
+/**
  * Add Bootstrap classes to core block output on the front end.
  *
  * @param string $block_content Rendered block HTML.
@@ -87,6 +120,7 @@ function wp_starter_bootstrap_core_block_classes(string $block_content, array $b
 
             if (isset($width_map[$width])) {
                 $column_classes[] = $width_map[$width];
+                $block_content   = wp_starter_remove_column_flex_basis($block_content);
             }
 
             $block_content = wp_starter_add_block_classes($block_content, 'div', $column_classes);
