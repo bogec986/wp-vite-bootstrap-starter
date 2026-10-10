@@ -58,36 +58,3 @@ h6 {
     margin-right: auto;
     margin-left: auto;
 }
-
-/* WordPress menu links follow Bootstrap navbar link variables. */
-.site-header .navbar-nav .menu-item > a {
-    display: block;
-    padding: var(--bs-navbar-nav-link-padding-y) var(--bs-navbar-nav-link-padding-x);
-    color: var(--bs-navbar-color);
-    text-decoration: none;
-    background: none;
-    border: 0;
-    transition: $nav-link-transition;
-}
-
-.site-header .navbar-nav .menu-item > a:hover {
-    color: var(--bs-navbar-hover-color);
-}
-
-.site-header .navbar-nav .current-menu-item > a,
-.site-header .navbar-nav .current_page_item > a,
-.site-header .navbar-nav .current-menu-ancestor > a,
-.site-header .navbar-nav .current_page_ancestor > a {
-    color: var(--bs-navbar-active-color);
-}
-
-.site-header .navbar-nav .menu-item > a:focus-visible {
-    outline: var(--bs-focus-ring-width) solid var(--bs-focus-ring-color);
-    outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .site-header .navbar-nav .menu-item > a {
-        transition: none;
-    }
-}
