@@ -1,9 +1,6 @@
 <?php
 /**
- * Bootstrap 5 navigation walker.
- *
- * Adds Bootstrap navbar, dropdown, nav-link, and dropdown-item classes
- * to WordPress menu markup.
+ * Bootstrap 5 navigation walker for WordPress menus.
  */
 
 declare(strict_types=1);
@@ -12,11 +9,7 @@ if (!class_exists('WP_Bootstrap_Navwalker')) {
     class WP_Bootstrap_Navwalker extends Walker_Nav_Menu
     {
         /**
-         * Start the submenu level.
-         *
-         * @param string   $output Used to append additional content.
-         * @param int      $depth  Depth of menu item.
-         * @param stdClass $args   Menu arguments.
+         * Start a submenu.
          */
         public function start_lvl(&$output, $depth = 0, $args = null): void
         {
@@ -25,25 +18,18 @@ if (!class_exists('WP_Bootstrap_Navwalker')) {
         }
 
         /**
-         * Start a menu item.
-         *
-         * @param string   $output            Used to append additional content.
-         * @param WP_Post  $data_object       Menu item data object.
-         * @param int      $depth             Depth of menu item.
-         * @param stdClass $args              Menu arguments.
-         * @param int      $current_object_id Current object ID.
+         * Render a menu item using Bootstrap 5 classes.
          */
         public function start_el(&$output, $data_object, $depth = 0, $args = null, $current_object_id = 0): void
         {
             $item = $data_object;
             $indent = $depth ? str_repeat("\t", $depth) : '';
-
             $classes = empty($item->classes) ? [] : (array) $item->classes;
             $has_children = in_array('menu-item-has-children', $classes, true);
             $is_current = in_array('current-menu-item', $classes, true)
                 || in_array('current_page_item', $classes, true);
 
-            $item_classes = ['menu-item-' . (int) $item->ID];
+            $item_classes = $classes;
 
             if ($depth === 0) {
                 $item_classes[] = 'nav-item';
@@ -53,36 +39,40 @@ if (!class_exists('WP_Bootstrap_Navwalker')) {
                 }
             }
 
-            $output .= $indent . '<li class="' . esc_attr(implode(' ', $item_classes)) . '">';
+            $item_classes = apply_filters('nav_menu_css_class', array_filter($item_classes), $item, $args, $depth);
+            $class_names = implode(' ', array_map('sanitize_html_class', $item_classes));
+            $item_id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth);
+
+            $output .= $indent . '<li id="' . esc_attr($item_id) . '" class="' . esc_attr($class_names) . '">';
+
+            $link_classes = $depth === 0
+                ? ($has_children ? 'nav-link dropdown-toggle' : 'nav-link')
+                : 'dropdown-item';
+
+            if ($is_current) {
+                $link_classes .= ' active';
+            }
 
             $attributes = [
                 'title'        => !empty($item->attr_title) ? $item->attr_title : '',
                 'target'       => !empty($item->target) ? $item->target : '',
                 'rel'          => !empty($item->xfn) ? $item->xfn : '',
                 'href'         => !empty($item->url) ? $item->url : '',
+                'class'        => $link_classes,
                 'aria-current' => $is_current ? 'page' : '',
             ];
 
-            if ($depth === 0) {
-                $attributes['class'] = $has_children ? 'nav-link dropdown-toggle' : 'nav-link';
-
-                if ($has_children) {
-                    $attributes['data-bs-toggle'] = 'dropdown';
-                    $attributes['aria-expanded'] = 'false';
-                    $attributes['role'] = 'button';
-                }
-            } else {
-                $attributes['class'] = 'dropdown-item';
-
-                if ($is_current) {
-                    $attributes['aria-current'] = 'page';
-                }
+            if ($depth === 0 && $has_children) {
+                $attributes['data-bs-toggle'] = 'dropdown';
+                $attributes['aria-expanded'] = 'false';
+                $attributes['role'] = 'button';
             }
 
+            $attributes = apply_filters('nav_menu_link_attributes', $attributes, $item, $args, $depth);
             $attribute_string = '';
 
             foreach ($attributes as $attribute => $value) {
-                if ($value === '') {
+                if ($value === '' || $value === null || $value === false) {
                     continue;
                 }
 
