@@ -145,7 +145,6 @@ This keeps development tooling out of the production asset workflow.
 
 ```text
 wp-starter/
-├── app/
 ├── inc/
 │   ├── carbon-fields.php
 │   ├── enqueue.php
@@ -158,24 +157,23 @@ wp-starter/
 │   │   └── editor.js
 │   └── scss/
 │       ├── _variables.scss
+│       ├── _gutenberg.scss
 │       ├── app.scss
 │       └── editor.scss
 ├── template-parts/
 │   └── content.php
-├── 404.php
 ├── archive.php
-├── search.php
-├── composer.json
+├── footer.php
 ├── functions.php
 ├── header.php
-├── footer.php
 ├── index.php
 ├── page.php
+├── search.php
 ├── single.php
 ├── sidebar.php
+├── theme.json
 ├── package.json
 ├── vite.config.js
-├── style.css
 └── README.md
 ```
 
@@ -280,9 +278,12 @@ Examples include:
 wp_starter_asset()
 wp_starter_carbon_theme_option()
 wp_starter_carbon_post_meta()
+wp_starter_posts_pagination()
 ```
 
 The Carbon Fields helpers safely return default values when Carbon Fields is not available.
+
+Archive and index templates use `wp_starter_posts_pagination()` to render WordPress pagination with Bootstrap 5 `pagination`, `page-item`, and `page-link` classes. The helper uses WordPress `paginate_links()` rather than implementing pagination logic itself.
 
 ## Carbon Fields
 
