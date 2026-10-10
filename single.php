@@ -20,7 +20,7 @@
                 <?php endif; ?>
 
                 <header class="mb-4">
-                    <h1 class="display-5"><?php the_title(); ?></h1>
+                    <h1><?php the_title(); ?></h1>
 
                     <?php if ($subtitle) : ?>
                         <p class="lead text-body-secondary mb-0">
