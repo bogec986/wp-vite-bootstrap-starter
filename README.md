@@ -179,6 +179,22 @@ wp-starter/
 └── README.md
 ```
 
+## Bootstrap 5 and Gutenberg core blocks
+
+The theme keeps WordPress core blocks and saved block content intact. A server-side `render_block` integration adds Bootstrap classes to rendered frontend HTML, rather than rewriting saved post content or the editor's save markup.
+
+The integration is loaded from `inc/bootstrap-blocks.php` and currently supports:
+
+- **Group** — choose the *Bootstrap Container* or *Bootstrap Fluid Container* block style from the block sidebar.
+- **Columns / Column** — adds Bootstrap `row`, gutter, and `col` classes. Column widths that match Bootstrap's 12-column grid are mapped to responsive `col-md-*` classes.
+- **Buttons** — maps the core Button block to `btn btn-primary`; the existing Outline style maps to `btn btn-outline-primary`. Secondary, Success, and Danger style classes are also recognized.
+- **Image / Gallery** — adds `img-fluid` to images and Bootstrap figure classes to image captions.
+- **Details** — choose the *Bootstrap Accordion Item* style for a native `details/summary` disclosure styled with Bootstrap accordion variables. It keeps native keyboard and browser disclosure behavior.
+
+The original Gutenberg blocks remain available and their saved content is not modified, so existing posts remain editable. These class adjustments apply to frontend rendering; the editor remains WordPress's native block editor.
+
+The HTML API used for safe markup updates (`WP_HTML_Tag_Processor`) is available in WordPress 6.2 and later. On older WordPress versions the helper leaves block markup unchanged.
+
 ## JavaScript
 
 The main frontend entry point is:
